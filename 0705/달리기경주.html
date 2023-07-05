@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        let players = ["mumu", "soe", "poe", "kai", "mine"]
+        let callings = ["kai", "kai", "mine", "mine"];
+        function solution(players, callings) {
+            let newPlayers = {}
+            for (let i = 0; i < players.length; i++) {
+                newPlayers[players[i]] = i;
+            }
+
+            for (let i = 0; i < callings.length; i++) {
+                let findPerson = callings[i];
+                const index = newPlayers[findPerson]
+                let findPersonBefore = players[index - 1];
+
+                newPlayers[findPerson] -= 1;
+                newPlayers[findPersonBefore] += 1;
+
+                players[index - 1] = findPerson;
+                players[index] = findPersonBefore;
+
+            }
+            return players;
+        }
+        console.log(solution(players, callings))
+    </script>
+</body>
+
+</html>
