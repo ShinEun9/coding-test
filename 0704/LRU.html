@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LRU</title>
+</head>
+
+<body>
+    <script>
+        function solution(동물, 자리) {
+            let 의자 = [];
+            let answer = 0;
+
+            for (var animal of 동물) {
+                if (의자.length < 자리) {
+                    if (의자.includes(animal)) {
+                        의자.splice(의자.indexOf(animal), 1)
+                        의자.push(animal)
+                        answer += 1;
+                    }
+                    else {
+                        의자.push(animal);
+                        answer += 60;
+                    }
+                }
+                else {
+                    if (의자.includes(animal)) {
+                        의자.splice(의자.indexOf(animal), 1)
+                        answer += 1;
+                    }
+                    else {
+                        의자.shift();
+                        의자.push(animal);
+                        answer += 60;
+                    }
+                }
+            }
+            return [parseInt(answer / 60), answer % 60]
+        }
+
+        let 동물 = ['척추동물', '어류', '척추동물', '무척추동물', '파충류', '척추동물', '어류', '파충류']
+        console.log(solution(동물, 3))
+
+        // let data = ['척추동물', '어류', '척추동물', '무척추동물', '파충류', '척추동물', '어류', '파충류']
+        // let seat = [];
+        // let m = 0;
+        // let s = 0;
+        // for (let animal of data) {
+        //     const isExist = seat.findIndex((element) => element === animal)
+        //     if (isExist === -1) {
+        //         // 해당 동물종이 존재하지 않을 때
+        //         if (seat.length === 3) {
+        //             seat.shift();
+        //         }
+        //         m += 1;
+        //         seat.push(animal);
+        //     }
+        //     else {
+        //         // 해당 동물종이 존재할 때
+        //         const index = seat.indexOf(animal);
+        //         if (index > -1) seat.splice(index, 1);
+        //         seat.push(animal);
+        //         s += 1;
+        //     }
+        // }
+
+        // console.log(m + "분 ", s +
+
+        //     "초")
+    </script>
+</body>
+
+</html>
