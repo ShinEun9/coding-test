@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>덧칠하기</title>
+</head>
+
+<body>
+    <script>
+        function solution(n, m, section) {
+            var answer = 0;
+
+            let wall = Array(n).fill(1).map((value, index) => value + index);
+            for (let i = n - 1; i >= 0; i--) {
+                let last = wall[i];
+                let sectionLast = section[section.length - 1];
+                if (section.length === 0) break;
+                if (last > sectionLast) continue;
+                let j = section.length - 1;
+                while (last - m + 1 <= section[j]) {
+                    section.pop();
+                    j--;
+                }
+                answer += 1;
+            }
+            return answer;
+        }
+
+        let n = 8;
+        let m = 4;
+        let section = [2, 3, 6];
+        let result = 2
+        console.log(solution(n, m, section))
+    </script>
+</body>
+
+</html>

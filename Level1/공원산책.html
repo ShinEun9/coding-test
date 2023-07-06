@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        function solution(park, routes) {
+            var answer = [];
+            let y = undefined;
+            let x = undefined;
+            let h = park.length;
+            let w = park[0].length;
+            for (let i = 0; i < park.length; i++) {
+                for (let j = 0; j < park[i].length; j++) {
+                    if (park[i][j] === "S") {
+                        y = i;
+                        x = j;
+                        break;
+                    }
+                }
+                if (x !== undefined && y !== undefined) break;
+            }
+
+            for (route of routes) {
+                let value = route.split(' ');
+                for (let i = 1; i < parseInt(value[1]) + 1; i++) {
+                    if (value[0] === "E") {
+                        if (x + i < 0 || x + i >= w || park[y][x + i] === "X") break;
+                    }
+                    else if (value[0] === "W") {
+                        if (x - i < 0 || x - i >= w || park[y][x - i] === "X") break;
+                    }
+                    else if (value[0] === "S") {
+                        if (y + i < 0 || y + i >= h || park[y + i][x] === "X") break;
+                    }
+                    else if (value[0] === "N") {
+                        if (y - i < 0 || y - i >= h || park[y - i][x] === "X") break;
+                    }
+
+                    if (i === parseInt(value[1])) {
+                        if (value[0] === "E") x += i;
+                        else if (value[0] === "W") x -= i;
+
+                        else if (value[0] === "N") y -= i
+                        else if (value[0] === "S") y += i
+                    }
+                }
+            }
+            answer.push(y);
+            answer.push(x);
+            return answer;
+        }
+        let park = ["SOO", "OOO", "OOO"];
+        let routes = ["E 2", "S 2", "W 1"];
+
+        console.log(solution(park, routes))
+    </script>
+</body>
+
+</html>

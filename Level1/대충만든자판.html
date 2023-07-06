@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대충만든자판</title>
+</head>
+
+<body>
+    <script>
+        function solution(keymap, targets) {
+            var answer = [];
+            const keyData = {}
+            for (value of keymap) {
+                for (let i = 0; i < value.length; i++) {
+                    if (!keyData[value[i]]) {
+                        keyData[value[i]] = i + 1;
+                    }
+                    else {
+                        if (keyData[value[i]] > i + 1) {
+                            keyData[value[i]] = i + 1;
+                        }
+                    }
+                }
+            }
+
+            for (target of targets) {
+                let count = 0;
+                for (let i = 0; i < target.length; i++) {
+                    if (keyData[target[i]]) {
+                        count += keyData[target[i]];
+                    }
+                    else {
+                        count = -1;
+                        break;
+                    }
+                }
+                answer.push(count);
+            }
+            return answer;
+        }
+
+        const keymap = ["ABACD", "BCEFD"];
+        const targets = ["ABCD", "AABB"];
+        const result = [9, 4]
+        console.log(solution(keymap, targets))
+    </script>
+</body>
+
+</html>
