@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카드뭉치</title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/159994 -->
+    <script>
+        function solution(cards1, cards2, goal) {
+            var answer = '';
+            cards1.reverse();
+            cards2.reverse();
+
+            let ok = true;
+            for (variable of goal) {
+                let cardLast = cards1.length - 1;
+                let cardLast2 = cards2.length - 1;
+                if (cards1[cardLast] === variable) {
+                    cards1.pop();
+                    continue;
+                }
+                else if (cards2[cardLast2] === variable) {
+                    cards2.pop();
+                    continue;
+                }
+                else {
+                    ok = false;
+                    break;
+                }
+            }
+
+            if (ok) return "Yes";
+            else return "No"
+
+            return answer;
+        }
+        const cards1 = ["i", "drink", "water"];
+        const cards2 = ["want", "to"];
+        const goal = ["i", "want", "to", "drink", "water"]
+
+        console.log(solution(cards1, cards2, goal))
+    </script>
+
+</body>
+
+</html>

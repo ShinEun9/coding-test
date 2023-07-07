@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보수집유효기간</title>
+</head>
+
+<body>
+    <script>
+        function calc(today, date, kind, termData) {
+            const calcDate = date.split('.')
+            let year = parseInt(calcDate[0]);
+            let month = parseInt(calcDate[1]);
+            let day = parseInt(calcDate[2]);
+
+            day = day - 1;
+            month = month + parseInt(termData[kind]);
+            if (day < 1) {
+                day = 28;
+                month -= 1;
+            }
+
+            if (new Date(year, month - 1, day) < today) {
+                return true;
+            } else { return false }
+        }
+
+        function solution(today, terms, privacies) {
+            var answer = [];
+            const termData = {}
+            for (term of terms) {
+                const kind = term.split(' ')[0];
+                const long = term.split(' ')[1];
+                termData[kind] = long;
+            }
+
+            for (let i = 0; i < privacies.length; i++) {
+                const date = privacies[i].split(' ')[0];
+                const kind = privacies[i].split(' ')[1];
+                const calcToday = new Date(today);
+                if (calc(calcToday, date, kind, termData)) {
+                    answer.push(i + 1);
+                }
+            }
+
+            return answer;
+        }
+
+        const today = "2022.05.19"
+        const terms = ["A 8", "B 12", "C 3"]
+        const privacies = ["2021.05.02 A", "2021.07.01 B", "2022.02.19 C", "2022.02.20 C"]
+        console.log(solution(today, terms, privacies))
+    </script>
+</body>
+
+</html>
