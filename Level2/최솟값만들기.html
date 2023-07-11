@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최솟값만들기</title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/12941 -->
+    <script>
+        function solution(A, B) {
+            var answer = 0;
+            A.sort((a, b) => a - b)
+            B.sort((a, b) => b - a);
+
+            for (let i = 0; i < A.length; i++) {
+                answer += A[i] * B[i]
+            }
+
+            return answer;
+        }
+
+        const A = [1, 4, 2];
+        const B = [5, 4, 4];
+        console.log(solution(A, B))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JadenCase 문자열 만들기
+    </title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/12951 -->
+    <script>
+        // function solution(s) {
+        //     var answer = [];
+        //     const arr = s.replace(/\s+/g, " ").trim().split(' ')
+        //     for (item of arr) {
+        //         const [s, ...rest] = [item[0].toUpperCase(), item.slice(1).toLowerCase()];
+        //         answer.push(s + rest)
+        //     }
+        //     return answer.join(' ');
+        // }
+
+        function solution(s) {
+            var answer = [];
+            const arr = s.split(' ')
+            for (item of arr) {
+                if (item !== "") {
+                    const [s, ...rest] = [item[0].toUpperCase(), item.slice(1).toLowerCase()];
+                    answer.push(s + rest)
+                }
+                else {
+                    answer.push(item.slice(1).toLowerCase());
+                }
+            }
+            return answer.join(' ');
+        }
+
+        const s = "3people unFollowed me"
+        const ss = "3 eople   un Follo  wed   mE"
+
+        console.log(solution(s))
+        console.log(solution(ss))
+
+        // function solution(s) {
+        //     var answer = '';
+        //     let result = s.split(' ');
+
+        //     let result2 = result.map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase());
+
+        //     answer = result2.join(" ")
+        //     return answer;
+        // }
+
+
+    </script>
+</body>
+
+</html>
