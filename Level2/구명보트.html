@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구명보트</title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/42885 -->
+    <script>
+        function solution(people, limit) {
+            var answer = 0;
+            people.sort((a, b) => a - b)
+            let i = 0;
+            let j = people.length - 1;
+            while (i <= j) {
+                if (limit - people[i] >= people[j]) {
+                    answer++;
+                    i++;
+                    j--;
+                }
+                else {
+                    answer++
+                    j--;
+                }
+            }
+            return answer;
+        }
+
+
+        // function solution(people, limit) {
+        //     people.sort(function (a, b) { return a - b });
+        //     for (var i = 0, j = people.length - 1; i < j; j--) {
+        //         if (people[i] + people[j] <= limit) i++;
+        //     }
+        //     return people.length - i;
+        // }
+
+        const people = [40, 45, 50, 50, 55, 60, 70, 80]
+        const limit = 100
+        console.log(solution(people, limit))
+
+    </script>
+</body>
+
+</html>

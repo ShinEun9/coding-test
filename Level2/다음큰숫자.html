@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다음큰숫자</title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/12911 -->
+    <script>
+        function countFunc(n) {
+            let count = 0;
+            (n).toString(2).split('').forEach((item) => { if (item === '1') count++ })
+            return count;
+        }
+
+        function solution(n) {
+            let i = n + 1;
+            let count = countFunc(n);
+            while (true) {
+                let iCount = countFunc(i);
+                if (iCount === count) break;
+                i++;
+            }
+
+            return i;
+        }
+        const n = 15;
+        console.log(solution(n))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카펫</title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/42842 -->
+    <script>
+        function solution(brown, yellow) {
+            let i = 1;
+            for (i = 1; i <= yellow; i++) {
+                if (yellow % i === 0) {
+                    const big = (i + 2) * (yellow / i + 2);
+                    if (big - yellow === brown) break;
+                }
+            }
+            return [yellow / i + 2, i + 2]
+        }
+        const brown = 8
+        const yellow = 1;
+        console.log(solution(brown, yellow))
+    </script>
+</body>
+
+</html>
