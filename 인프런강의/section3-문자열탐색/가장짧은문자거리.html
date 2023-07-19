@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가장짧은 문자거리</title>
+</head>
+
+<body>
+    <script>
+        function solution(s, t) {
+            let answer = [];
+            let i = j = 0;
+            const regex = new RegExp(`[${t}]+`, 'g');
+            let ss = s.split(regex).filter(item => item !== "")
+
+            while (i < s.length) {
+                if (s[i] === "e") {
+                    answer.push(0);
+                    i++
+                }
+                else {
+                    let len = ss[j].length
+                    for (let k = 0; k < len; k++) {
+                        if (s[i + len] === "e") {
+                            if (k < len / 2) {
+                                answer.push(k + 1)
+                            } else {
+                                answer.push(len - k)
+                            }
+                        }
+                        else {
+                            answer.push(k + 1)
+                        }
+                    }
+                    i += len;
+                    j++;
+                }
+            }
+            return answer;
+        }
+
+        console.log(solution("teachermode", "e"))
+    </script>
+</body>
+
+</html>

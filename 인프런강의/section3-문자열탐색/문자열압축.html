@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열압축</title>
+</head>
+
+<body>
+    <script>
+        function solution(s) {
+            // let answer = ''
+            // let last = s[0]
+            // let n = s.length;
+            // let count = 1;
+            // for (let i = 1; i < n; i++) {
+            //     if (last === s[i]) { count++ }
+            //     else {
+            //         if (count === 1) {
+            //             answer += last;
+            //         }
+            //         else {
+            //             answer += last + count;
+            //         }
+            //         last = s[i];
+            //         count = 1
+            //     }
+            //     if (i === n - 1) {
+            //         if (count === 1) {
+            //             answer += last;
+            //         }
+            //         else {
+            //             answer += last + count;
+            //         }
+            //     }
+            // }
+
+            let answer = ''
+            let n = s.length;
+            let count = 1;
+            for (let i = 0; i < n; i++) {
+                if (s[i] === s[i + 1]) { count++; }
+                else {
+                    answer += s[i];
+                    if (count > 1) {
+                        answer += String(count)
+                    }
+                    count = 1;
+                }
+            }
+
+            return answer;
+
+        }
+        console.log(solution("KKHSSSSSSSEEE"))
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>등수구하기</title>
+</head>
+
+<body>
+    <script>
+        function solution(arr, n) {
+            let answer = [];
+            let k = arr.slice().sort((a, b) => b - a);
+            console.log(k, arr);
+            for (x of arr) {
+                answer.push(k.indexOf(x) + 1)
+            }
+            return answer;
+        }
+
+        let n = 5;
+        let arr = [92, 92, 92, 100, 76];
+        console.log(solution(arr));
+    </script>
+</body>
+
+</html>
