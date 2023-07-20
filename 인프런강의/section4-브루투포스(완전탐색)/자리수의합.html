@@ -11,7 +11,28 @@
 <body>
     <!-- 브루투포스란? -->
     <!-- https://www.youtube.com/watch?v=ZNa9-86uVEA -->
-    <script></script>
+    <script>
+        function solution(n, arr) {
+            let maxSum = Number.MIN_SAFE_INTEGER;
+            let maxNumber;
+            for (let i = 0; i < arr.length; i++) {
+                let sum = 0
+                for (x of String(arr[i])) {
+                    sum += parseInt(x)
+                }
+                if (sum > maxSum) {
+                    maxSum = sum;
+                    maxNumber = arr[i]
+                }
+                else if (sum === maxSum) {
+                    if (arr[i] > maxNumber) { maxNumber = arr[i] }
+                }
+            }
+            return maxNumber;
+        }
+        let arr = [128, 460, 603, 40, 521, 137, 123];
+        console.log(solution(7, arr));
+    </script>
 </body>
 
 </html>

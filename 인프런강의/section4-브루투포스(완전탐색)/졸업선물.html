@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>졸업선물</title>
+</head>
+
+<body>
+    <script>
+        function solution(m, product) {
+            let answer = 0;
+            product.sort((a, b) => {
+                let sumA = a[0] + a[1]
+                let sumB = b[0] + b[1]
+                return sumA - sumB;
+            })
+
+
+            return answer;
+        }
+
+        // let arr = [[6, 6], [2, 2], [4, 3], [4, 5], [10, 3]];
+        console.log(solution(33, [[2, 12], [8, 4], [6, 6], [6, 7]]));
+    </script>
+</body>
+
+</html>

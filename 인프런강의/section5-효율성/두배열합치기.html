@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두배열합치기</title>
+</head>
+
+<body>
+    <!-- 오름차순으로 정렬이 된 두 배열이 주어지면 두 배열을 오름차순으로 합쳐 출력하는 프로그램을 작성하세요-->
+    <script>
+        function solution(arr1, arr2) {
+            // let answer = [];
+            // let newArr = [...arr1, ...arr2];
+
+            // newArr.sort((a, b) => a - b)
+            // return newArr;
+
+            let i = j = 0;
+            let answer = [];
+            while (i < arr1.length && j < arr2.length) {
+                if (arr1[i] < arr2[j]) {
+                    answer.push(arr1[i])
+                    i++;
+                }
+                else {
+                    answer.push(arr2[j])
+                    j++
+                }
+            }
+
+            while (i < arr1.length) { answer.push(arr1[i]); i++ }
+            while (i < arr2.length) { answer.push(arr2[j]); j++ }
+
+            return answer;
+        }
+
+        let a = [1, 3, 5];
+        let b = [2, 3, 6, 7, 9];
+        console.log(solution(a, b));    </script>
+</body>
+
+</html>

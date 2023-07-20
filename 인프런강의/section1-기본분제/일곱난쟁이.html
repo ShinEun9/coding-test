@@ -9,10 +9,24 @@
 </head>
 
 <body>
+    <!-- 아홉개의 줄에 걸쳐 난쟁이들의 키가 주어진다.  -->
     <!-- 일곱 난쟁이의 키의 합은 100이 되어야 한다.-->
     <script>
         function solution(arr) {
             let answer = arr;
+            let sum = arr.reduce((a, b) => a + b, 0);
+            let diff = sum - 100;
+
+            for (let i = 0; i < arr.length - 1; i++) {
+                for (let j = i; j < arr.length; j++) {
+                    if (arr[i] + arr[j] === diff) {
+                        answer.splice(j, 1)
+                        answer.splice(i, 1)
+                        break;
+                    }
+                }
+                if (answer.length === 7) break;
+            }
 
             return answer;
         }
