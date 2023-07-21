@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>순열</title>
+</head>
+
+<body>
+    <!-- https://velog.io/@rlatp1409/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-JS-%EC%88%9C%EC%97%B4%EA%B3%BC-%EC%A1%B0%ED%95%A9-%EA%B5%AC%ED%98%84-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8 -->
+
+    <!-- 
+    1. 선별 [a] 잔여 [b,c]
+    1-1. 선별 [a,b] 잔여 [c]
+    1-1-1. 선별 [a,b,c] 잔여 [] => 순열 하나 완성
+    1-2. 선별 [a,c] 잔여 [b]
+    1-2-1. 선별 [a,c,b] 잔여 [b] => 순열 둘 완성
+    2. 선별 [b] 잔여 [a,c]
+    2-1. 선별 [b,a] 잔여 [c]
+    2-1-1. 선별 [b,a,c] 잔여 => 순열 셋 완성
+    2-2. 선별 [b,c] 잔여 [a]
+    2-2-1. 선별 [b,c,a] => 순열 넷 완성
+     -->
+    <script>
+        // const arr = ["a", "b", "c", "d"];
+
+        // const permutation = (permu, rests, output) => {
+        //     if (rests.length == 0) {
+        //         return output.push(permu);
+        //     }
+        //     rests.forEach((v, idx) => {
+        //         const rest = [...rests.slice(0, idx), ...rests.slice(idx + 1)]
+        //         permutation([...permu, v], rest, output);
+        //     })
+        // }
+
+        // const output = [];
+        // permutation([], ['a', 'b', 'c', 'd'], output);
+        // console.log(output);
+
+        const getPermutations = (arr, num) => {
+            const results = [];
+
+            // nP1 이며, 1이면 의미 없기때문에 바로 반환한다.
+            if (num === 1) return arr.map(v => [v]);
+
+            arr.forEach((fixed, index, origin) => {
+                // 순열에서는 조합과 달리 순서만 바뀌면 중복이 아니기때문에 기준값을 제외한 나머지 배열을 넣어준다.
+                const rest = [...origin.slice(0, index), ...origin.slice(index + 1)];
+
+                // 나머지 배열을 기준으로 다시 순열을 구한다.
+                // 기준값(fixed)이 있기 때문에 선택하려는 개수에서 - 1 을 해준다.
+                const permutations = getPermutations(rest, num - 1);
+
+                // 기준값(fixed)에 순열(permutations)을 붙인다.
+                const attached = permutations.map(v => [fixed, ...v]);
+
+                // 붙인 값을 결과 값에 넣어준다.
+                results.push(...attached);
+            });
+
+            return results;
+        }
+
+
+    </script>
+</body>
+
+</html>

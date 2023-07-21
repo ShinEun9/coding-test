@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>브루투포스-최소직사각형</title>
+</head>
+
+<body>
+    <script>
+        function solution(sizes) {
+            var answer = 0;
+            var small = [];
+            var large = [];
+
+            for (x of sizes) {
+                if (x[0] < x[1]) {
+                    small.push(x[0])
+                    large.push(x[1])
+                } else {
+                    small.push(x[1])
+                    large.push(x[0])
+                }
+            }
+
+            const a = Math.max(...small);
+            const b = Math.max(...large);
+
+            return a * b;
+        }
+
+        // function solution(sizes) {
+        //     const rotated = sizes.map(([w, h]) => w < h ? [h, w] : [w, h]);
+
+        //     let maxSize = [0, 0];
+        //     rotated.forEach(([w, h]) => {
+        //         if (w > maxSize[0]) maxSize[0] = w;
+        //         if (h > maxSize[1]) maxSize[1] = h;
+        //     })
+        //     return maxSize[0] * maxSize[1];
+        // }
+
+        const sizes = [[10, 7], [12, 3], [8, 15], [14, 7], [5, 15]]
+        const result = 120;
+        console.log(solution(sizes))
+    </script>
+</body>
+
+</html>

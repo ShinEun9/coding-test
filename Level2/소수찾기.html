@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소수찾기</title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/42839 -->
+    <script>
+        const getPermutations = (arr, num) => {
+            const results = [];
+            if (num === 1) return arr.map(v => v);
+
+            arr.forEach((fixed, index, origin) => {
+                const rest = [...origin.slice(0, index), ...origin.slice(index + 1)];
+
+                const permutations = getPermutations(rest, num - 1);
+
+                const attached = permutations.map(v => [fixed, ...v].join(''));
+
+                results.push(...attached);
+            });
+
+            return results;
+        }
+
+        const isPrime = (num) => {
+            if (num <= 1) return false;
+            for (let i = 2; i <= num / 2; i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+
+        function solution(numbers) {
+            var answer = 0;
+            const arr = numbers.split('');
+            let combination = new Set();
+            let i = j = 0;
+
+            for (let i = 1; i <= arr.length; i++) {
+                const permutation = getPermutations(arr, i)
+                for (x of permutation) {
+                    combination.add(parseInt(x))
+                }
+            }
+
+            for (x of combination) {
+                if (isPrime(x)) answer++;
+            }
+
+            return answer;
+        }
+
+        // function solution(numbers) {
+        //     var answer = 0;
+
+        //     var n = numbers.split('');
+        //     var nums = new Set()
+        //     combi(n, '');
+
+        //     function combi(a, s) {
+        //         if (s.length > 0) {
+        //             if (nums.has(Number(s)) === false) {
+        //                 nums.add(Number(s));
+        //                 console.log(Number(s))
+        //                 if (chkPrime(Number(s))) {
+
+        //                     answer++;
+        //                 }
+        //             }
+        //         }
+        //         if (a.length > 0) {
+        //             for (var i = 0; i < a.length; i++) {
+        //                 var t = a.slice(0)
+        //                 t.splice(i, 1);
+        //                 //console.log(t)
+        //                 combi(t, s + a[i]);
+        //             }
+        //         }
+        //     }
+
+        //     function chkPrime(num) {
+        //         if (num < 2) return false;
+        //         if (num === 2) return true;
+        //         for (var i = 2; i <= Math.sqrt(num); i++) {
+        //             if (num % i === 0) return false;
+        //         }
+        //         return true;
+        //     }
+
+        //     return answer;
+        // }
+
+        console.log(solution("011"))
+    </script>
+</body>
+
+</html>
