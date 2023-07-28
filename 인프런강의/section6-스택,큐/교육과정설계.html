@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교육과정설계-큐</title>
+</head>
+
+<body>
+    <script>
+        // function solution(need, plan) {
+        //     let a = need.split('')
+        //     for (let i = 0; i < plan.length; i++) {
+        //         if (plan[i] === a[0]) {
+        //             a.shift();
+        //         }
+        //     }
+        //     if (a.length !== 0) { return "NO" }
+        //     return "YES";
+        // }
+
+        // function solution(need, plan) {
+        //     let j = 0;
+        //     for (let i = 0; i < plan.length; i++) {
+        //         if (plan[i] === a[j]) {
+        //             j++;
+        //         }
+        //     }
+        //     if (j > a.length - 1) { return "YES" }
+        //     return "No";
+        // }
+
+
+        function solution(need, plan) {
+            let answer = "YES";
+            let queue = need.split('');
+            for (let x of plan) {
+                if (queue.includes(x)) {
+                    if (x !== queue.shift()) return "NO";
+                }
+            }
+            if (queue.length > 0) return "NO";
+            return answer;
+        }
+
+        let a = "CBA";
+        let b = "CBDAGE";
+        console.log(solution(a, b));
+    </script>
+</body>
+
+</html>

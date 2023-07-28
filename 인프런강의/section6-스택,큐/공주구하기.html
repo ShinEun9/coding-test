@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공주구하기</title>
+</head>
+
+<body>
+    <script>
+        // function solution(n, k) {
+        //     let queue = Array(n).fill(0).map((item, index) => item + index + 1);
+        //     let answer;
+        //     let index = 0;
+        //     while (queue.length > 1) {
+        //         index = index + k - 1;
+
+        //         if (index > queue.length - 1) {
+        //             index = index % queue.length
+        //         }
+        //         queue.splice(index, 1);
+        //     }
+        //     return queue[0];
+        // }
+
+        function solution(n, k) {
+            let answer;
+            let queue = Array.from({ length: n }, (v, i) => i + 1);
+            while (queue.length) {
+                for (let i = 1; i < k; i++) queue.push(queue.shift());
+                queue.shift();
+                if (queue.length === 1) answer = queue.shift();
+            }
+            return answer;
+        }
+
+        console.log(solution(8, 3));
+
+    </script>
+</body>
+
+</html>

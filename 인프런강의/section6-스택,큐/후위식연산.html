@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>후위식연산</title>
+</head>
+
+<body>
+    <script>
+        function solution(s) {
+            let answer = ''
+            let stack = []
+            for (x of s) {
+                if (Number(x)) {
+                    stack.push(parseInt(x))
+                }
+                else {
+                    let second = stack.pop();
+                    let first = stack.pop();
+
+                    if (x === "+") {
+                        stack.push(first + second)
+                    }
+                    else if (x === "-") {
+                        stack.push(first - second)
+                    }
+                    else if (x === "*") {
+                        stack.push(first * second)
+                    }
+                    else if (x === "/") {
+                        stack.push(first / second)
+                    }
+                }
+            }
+            return stack[0]
+        }
+
+        console.log(solution('352+*9-'))
+    </script>
+</body>
+
+</html>

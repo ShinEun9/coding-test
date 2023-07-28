@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>괄호문자제거-스택</title>
+</head>
+
+<body>
+    <script>
+        function solution(s) {
+            let answer;
+            let stack = [];
+
+            for (x of s) {
+                if (x === ')') {
+                    if (stack.length <= 0) {
+                        return;
+                    }
+                    // while (stack[stack.length - 1] !== "(") {
+                    //     stack.pop();
+                    // }
+                    // if (stack[stack.length - 1] === '(') { stack.pop() }
+                    while (stack.pop() !== '(');
+                } else {
+                    stack.push(x)
+                }
+            }
+
+            return stack.join('');
+        }
+
+        let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+        // str = "((AB)))"
+        console.log(solution(str));
+    </script>
+</body>
+
+</html>
