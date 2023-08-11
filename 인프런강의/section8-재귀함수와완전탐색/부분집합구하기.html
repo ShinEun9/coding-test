@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부분집합구하기</title>
+</head>
+
+<body>
+    <script>
+        function solution(n) {
+            function DFS(m) {
+                if (m >= 2 ** n) {
+                    let string = (2 ** (n + 1) - (m + 1)).toString(2)
+
+                    let stringLength = string.length;
+                    for (let i = 0; i < n - stringLength; i++) {
+                        string = String(0) + string
+                    }
+
+                    let print = []
+                    for (let i = 1; i <= n; i++) {
+                        if (string[i - 1] === '0') { continue; }
+                        else { print.push(i) }
+                    }
+                    if (print.length !== 0) {
+                        console.log(print.join(' '))
+                    }
+                    return;
+                }
+                else {
+                    DFS(2 * m);
+                    DFS(2 * m + 1);
+                }
+            }
+
+            DFS(1)
+        }
+
+        solution(4)
+    </script>
+</body>
+
+</html>

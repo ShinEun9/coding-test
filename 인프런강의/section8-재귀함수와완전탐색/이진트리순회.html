@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이진트리순회</title>
+</head>
+
+<body>
+    <script>
+        // 전위순회
+        function solution(m) {
+            let answer = []
+            function DFS(n) {
+                if (n > m) return;
+                else {
+                    DFS(2 * n);
+                    DFS(2 * n + 1);
+                    answer.push(n);
+                }
+            }
+            DFS(1);
+            console.log(answer.join(' '));
+        }
+        solution(7);
+    </script>
+</body>
+
+</html>
