@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뮤직비디오-결정알고리즘</title>
+</head>
+
+<body>
+    <script>
+        function solution(m, songs) {
+            let answer = Number.MAX_SAFE_INTEGER;
+            let lt = Math.max(...songs);
+            let rt = songs.reduce((a, c) => a + c, 0);
+            let mid
+
+            while (lt <= rt) {
+                mid = parseInt((lt + rt) / 2);
+                let sum = 0;
+                let count = 1;
+                for (let i = 0; i < songs.length; i++) {
+                    if (sum + arr[i] > mid) {
+                        count++;
+                        sum = arr[i];
+                    }
+                    else {
+                        sum += arr[i];
+                    }
+                }
+
+
+                if (count <= m) {
+
+                    rt = mid - 1;
+                    if (mid < answer) {
+                        answer = mid;
+                    }
+                }
+                else {
+                    lt = mid + 1;
+                }
+            }
+            return answer;
+        }
+
+        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        console.log(solution(3, arr));
+    </script>
+</body>
+
+</html>
