@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        function solution(c, arr) {
+            let answer = Number.MIN_SAFE_INTEGER;
+            function DFS(n, sum) {
+                if (sum > c) return;
+                if (n === arr.length) {
+                    if (sum > answer) {
+                        answer = sum;
+                    }
+                }
+                else {
+                    DFS(n + 1, sum + arr[n]);
+                    DFS(n + 1, sum);
+                }
+            }
+            DFS(0, 0);
+            return answer;
+        }
+
+        let arr = [81, 58, 42, 33, 61];
+        console.log(solution(259, arr));
+    </script>
+</body>
+
+</html>

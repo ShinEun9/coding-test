@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동전교환</title>
+</head>
+
+<body>
+    <script> function solution(m, arr) {
+            let answer = Number.MAX_SAFE_INTEGER;
+            let n = arr.length;
+            function DFS(i, sum) {
+                if (sum > m) return;
+                if (i >= answer) return;  // 이거 필수
+                if (sum === m) {
+                    if (answer > i) {
+                        answer = i;
+                    }
+                }
+                else {
+                    for (let j = 0; j < n; j++) {
+                        DFS(i + 1, sum + arr[j]);
+                    }
+                }
+
+                return;
+            }
+            DFS(0, 0);
+            return answer;
+        }
+
+        let arr = [1, 2, 5];
+        console.log(solution(15, arr));</script>
+</body>
+
+</html>

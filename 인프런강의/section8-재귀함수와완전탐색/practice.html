@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재귀함수 연습</title>
+</head>
+
+<body>
+
+    <script>
+        // 1번문제
+        // function solution(n) {
+        //     function DFS(m) {
+        //         if (m === n + 1) return;
+        //         console.log(m);
+        //         DFS(n + 1);
+        //     }
+        //     DFS(1);
+        // }
+
+        // solution(3);
+
+        // function solution(n) {
+        //     function DFS(L) {
+        //         if (L == 0) return;
+        //         else {
+        //             DFS(L - 1);
+        //             console.log(L);
+        //         }
+        //     }
+        //     DFS(n);
+        // }
+
+        // solution(3);
+
+        // 재귀함수를 이용한 이진수 출력
+        // function solution(n) {
+        //     let answer = ''
+        //     function DFS(n) {
+        //         if (n === 0) return;
+        //         else {
+        //             DFS(parseInt(n / 2));
+        //             answer += String(n % 2);
+        //         }
+        //     }
+
+        //     DFS(n);
+        //     return answer;
+        // }
+
+        // console.log(solution(15));
+
+        // 이진트리 순회(깊이우선탐색)
+        function solution(m) {
+            let answer = "";
+
+            function DFS(v) {
+                if (v > m) return;
+                else {
+                    DFS(2 * v);
+                    answer += v + ' '
+                    DFS(2 * v + 1)
+                }
+            }
+
+            DFS(1);
+            return answer;
+        }
+
+        console.log(solution(7));
+    </script>
+</body>
+
+</html>

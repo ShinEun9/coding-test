@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최대점수구하기</title>
+</head>
+
+<body>
+    <script>
+        function solution(m, ps, pt) {
+            let answer = Number.MIN_SAFE_INTEGER;
+
+
+            function DFS(index, scoreSum, timeSum) {
+                if (timeSum > m) return;
+                if (index === ps.length + 1) {
+                    if (scoreSum > answer) {
+                        answer = scoreSum;
+                    }
+                }
+                else {
+                    DFS(index + 1, scoreSum + ps[index], timeSum + pt[index])
+                    DFS(index + 1, scoreSum, timeSum)
+                }
+            }
+
+            DFS(0, 0, 0)
+            return answer;
+        }
+
+        let ps = [10, 25, 15, 6, 7];
+        let pt = [5, 12, 8, 3, 4]
+        console.log(solution(20, ps, pt));
+    </script>
+</body>
+
+</html>
