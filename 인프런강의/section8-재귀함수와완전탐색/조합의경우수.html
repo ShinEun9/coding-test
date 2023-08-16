@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조합의경우수</title>
+</head>
+
+<body>
+    <script>
+        // function solution(n, m) {
+        //     let tmp = Array.from(Array(35), () => Array(35).fill(0));
+        //     function DFS(i, j) {
+        //         if (tmp[i][j]) { return tmp[i][j] }
+        //         if (i === j) { return 1; }
+        //         if (j === 0) { return 1; }
+        //         else {
+        //             tmp[i][j] = DFS(i - 1, j - 1) + DFS(i - 1, j);
+        //             return tmp[i][j]
+        //         }
+        //     }
+        //     return DFS(n, m)
+        // }
+        // console.log(solution(10, 3))
+        function solution(n, r) {
+            let answer = [];
+            let dy = Array.from(Array(35), () => Array(35).fill(0));
+
+            function DFS(n, r) {
+                if (dy[n][r] > 0) return dy[n][r];
+                if (n === r || r === 0) return 1;
+                else return dy[n][r] = DFS(n - 1, r - 1) + DFS(n - 1, r);
+            }
+            answer = DFS(n, r);
+            return answer;
+        }
+
+        console.log(solution(5, 3));
+    </script>
+</body>
+
+</html>

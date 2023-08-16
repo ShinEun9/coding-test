@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수들의 조합</title>
+</head>
+
+<body>
+    N개의 정수가 주어지면 그 숫자를 K개를 뽑는 조합의 합이 임의의 정수 M의 배수의 개수는 몇개가 있는지 출력하는 프로그램
+    <script>
+        // function solution(arr, n, k, m) {
+        //     const answer = []
+        //     const tmp = Array.from({ length: k }, () => 0);
+        //     function DFS(L, s) {
+        //         if (L === k) {
+        //             const sum = tmp.slice().reduce((a, c) => a + c, 0);
+        //             if (sum % m === 0) {
+        //                 answer.push(tmp.slice())
+        //             }
+        //         }
+        //         else {
+        //             for (let i = s; i < n; i++) {
+        //                 tmp[L] = arr[i];
+        //                 DFS(L + 1, i + 1);
+        //             }
+        //         }
+        //     }
+        //     DFS(0, 0);
+        //     return answer.length;
+
+
+        // }
+        // const arr = [2, 4, 5, 8, 12];
+        // console.log(solution(arr, 5, 3, 6));
+
+        function solution(n, k, arr, m) {
+            let answer = 0;
+            function DFS(L, s, sum) {
+                if (L === k) {
+                    if (sum % m === 0) answer++;
+                }
+                else {
+                    for (let i = s; i < n; i++) {
+                        DFS(L + 1, i + 1, sum + arr[i]);
+                    }
+                }
+            }
+
+            DFS(0, 0, 0);
+            return answer;
+        }
+
+        let arr = [2, 4, 5, 8, 12];
+        console.log(solution(5, 3, arr, 6));
+    </script>
+</body>
+
+</html>

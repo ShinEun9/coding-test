@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조합구하기</title>
+</head>
+
+<body>
+    <script>
+        // function solution(n, r) {
+        //     const ch = Array.from({ length: n }, () => 0)
+        //     const answer = []
+        //     function DFS(L) {
+        //         if (ch.filter((item) => item === 1).length > r) {
+        //             return;
+        //         }
+        //         if (L === n) {
+        //             if (ch.filter((item) => item === 1).length === r) {
+        //                 let tmp = []
+        //                 ch.forEach((item, index) => {
+        //                     if (item === 1) {
+        //                         tmp.push(index + 1)
+        //                     }
+        //                 })
+        //                 console.log(tmp)
+        //                 answer.push(tmp);
+        //             }
+        //         }
+        //         else {
+        //             ch[L] = 1;
+        //             DFS(L + 1);
+        //             ch[L] = 0;
+        //             DFS(L + 1);
+        //         }
+        //     }
+        //     DFS(0);
+        //     return answer.length;
+        // }
+        // function solution(n, r) {
+        //     const answer = [];
+        //     const ch = Array.from({ length: n }, () => 0);
+        //     // let tmp = Array.from({ length: r }, () => 0);
+        //     function DFS(L) {
+        //         if (L === r) {
+        //             let tmp = []
+        //             ch.forEach((item, index) => {
+        //                 if (item === 1) { tmp.push(index + 1) }
+        //             })
+        //             answer.push(tmp);
+
+        //             return;
+        //         }
+        //         else {
+        //             let index = ch.lastIndexOf(1);
+
+        //             for (let i = index + 1; i < n; i++) {
+        //                 if (ch[i] === 0) {
+        //                     ch[i] = 1;
+        //                     DFS(L + 1);
+        //                     ch[i] = 0;
+        //                 }
+        //             }
+        //         }
+
+        //     }
+
+        //     DFS(0);
+        //     return answer
+        // }
+        function solution(n, m) {
+            const tmp = Array.from({ length: m }, () => 0);
+            const answer = []
+            function DFS(L, s) {
+                if (L === m) {
+                    answer.push(tmp.slice())
+                }
+                else {
+                    for (let i = s; i <= n; i++) {
+                        tmp[L] = i;
+                        DFS(L + 1, i + 1)
+                    }
+                }
+            }
+            DFS(0, 1);
+            return answer;
+        }
+        console.log(solution(5, 3))
+    </script>
+</body>
+
+</html>

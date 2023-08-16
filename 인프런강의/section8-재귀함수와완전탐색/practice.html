@@ -54,23 +54,67 @@
         // console.log(solution(15));
 
         // 이진트리 순회(깊이우선탐색)
-        function solution(m) {
-            let answer = "";
+        // function solution(m) {
+        //     let answer = "";
 
-            function DFS(v) {
-                if (v > m) return;
+        //     function DFS(v) {
+        //         if (v > m) return;
+        //         else {
+        //             DFS(2 * v);
+        //             answer += v + ' '
+        //             DFS(2 * v + 1)
+        //         }
+        //     }
+
+        //     DFS(1);
+        //     return answer;
+        // }
+
+        // console.log(solution(7));
+
+        // function solution(n, m) {
+        //     const answer = [];
+        //     const tmp = Array({ length: m }, () => 0);
+
+        //     function DFS(L) {
+        //         if (L === m) {
+        //             console.log(tmp);
+        //             answer.push(tmp);
+        //             return;
+        //         }
+        //         for (let i = 0; i < n; i++) {
+        //             tmp[L] = i + 1;
+        //             DFS(L + 1);
+        //         }
+        //     }
+        //     DFS(0)
+        //     return answer.length;
+        // }
+
+        // console.log(solution(3, 2))
+
+        function solution(arr, m) {
+            let answer = Number.MAX_SAFE_INTEGER;
+            function DFS(L, sum) {
+                if (sum > m) return;
+                if (L >= answer) return;
+                if (sum === m) {
+                    if (L < answer) {
+                        answer = L
+                        return;
+                    }
+                }
                 else {
-                    DFS(2 * v);
-                    answer += v + ' '
-                    DFS(2 * v + 1)
+                    for (let i = 0; i < arr.length; i++) {
+                        DFS(L + 1, sum + arr[i]);
+                    }
                 }
             }
-
-            DFS(1);
+            DFS(0, 0);
             return answer;
         }
-
-        console.log(solution(7));
+        const arr = [1, 2, 5]
+        console.log(solution(arr, 15))
     </script>
 </body>
 
