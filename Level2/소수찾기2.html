@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소수찾기</title>
+</head>
+
+<body>
+    <!-- https://school.programmers.co.kr/learn/courses/30/lessons/42839 -->
+    <script>
+        const isPrime = (num) => {
+            if (num <= 1) return false;
+            for (let i = 2; i <= num / 2; i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function solution(numbers) {
+            const numArr = numbers.split('');
+            let ch, tmp;
+            let answer = 0;
+            let num = new Set();
+            function makeNum(L, r) {
+                if (L === r) {
+                    num.add(parseInt(tmp.slice().join('')));
+                }
+                else {
+                    for (let i = 0; i < numArr.length; i++) {
+                        if (ch[i] === 0) {
+                            ch[i] = 1;
+                            tmp[L] = numArr[i];
+                            makeNum(L + 1, r);
+                            ch[i] = 0;
+                        }
+                    }
+                }
+            }
+
+            for (let i = 1; i <= numArr.length; i++) {
+                ch = Array.from({ length: numArr.length }, () => 0);
+                tmp = Array.from({ length: i }, () => 0);
+                makeNum(0, i);
+            }
+
+            for (x of num) {
+                if (isPrime(x)) answer++;
+            }
+
+            return answer;
+        }
+        console.log(solution("17"))
+    </script>
+</body>
+
+</html>
