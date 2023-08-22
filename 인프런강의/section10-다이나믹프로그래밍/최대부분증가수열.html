@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최대부분증가수열</title>
+</head>
+
+<body>
+    <script>
+        // function solution(arr) {
+        //     let answer = 0;
+        //     let stack = [0,];
+        //     function DFS(s, count) {
+        //         let i;
+        //         for (i = s; i < arr.length; i++) {
+        //             if (arr[i] > stack[stack.length - 1]) {
+        //                 stack.push(arr[i]);
+        //                 DFS(i + 1, count + 1);
+        //                 stack.pop();
+        //             }
+        //         }
+
+        //         if (i === arr.length) {
+        //             if (count > answer) answer = count;
+        //             return;
+        //         }
+        //     }
+
+        //     DFS(0, 0)
+        //     return answer;
+        // }
+        // console.log(solution([2, 7, 5, 8, 6, 4, 7, 12, 3]))
+
+        // function solution(arr) {
+        //     let answer = 0;
+        //     const dy = Array.from({ length: arr.length }, () => 0);
+
+        //     dy[0] = 1;
+        //     for (let i = 1; i < arr.length; i++) {
+        //         let j = i - 1;
+        //         let max = Number.MIN_SAFE_INTEGER;
+        //         while (j >= 0) {
+        //             if (arr[i] > arr[j]) {
+        //                 if (dy[j] > max) {
+        //                     max = dy[j]
+        //                     dy[i] = dy[j] + 1;
+
+        //                 }
+
+
+        //             }
+        //             j--;
+        //             // dy.filter(()=>)
+        //         }
+
+        //         if (dy[i] === 0) {
+        //             dy[i] = 1;
+        //         }
+        //     }
+        //     console.log(dy);
+        //     answer = Math.max(...dy)
+        //     return answer;
+        // }
+
+        function solution(arr) {
+            let answer = 0;
+            let dy = Array.from({ length: arr.length }, () => 0);
+            dy[0] = 1;
+            for (let i = 1; i < arr.length; i++) {
+                let max = 0;
+                for (let j = i - 1; j >= 0; j--) {
+                    if (arr[j] < arr[i] && dy[j] > max) {
+                        max = dy[j];
+                    }
+                }
+                dy[i] = max + 1;
+            }
+            return Math.max(...dy);
+        }
+
+
+
+        console.log(solution([2, 7, 5, 8, 6, 4, 7, 12, 3]))
+        // console.log(solution([5, 3, 7, 8, 6, 2, 9, 4]))
+        // console.log(solution([1]))
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계단오르기</title>
+</head>
+
+<body>
+    <script>
+        // function solution(n) {
+        //     let answer = 0;
+        //     function DFS(sum) {
+        //         if (sum > n) return;
+        //         if (sum === n) {
+        //             answer++;
+        //         }
+        //         else {
+        //             for (let i = 1; i <= 2; i++) {
+        //                 DFS(sum + i);
+        //             }
+        //         }
+        //     }
+        //     DFS(0);
+        //     return answer;
+        // }
+        function solution(n) {
+            let answer = 0;
+            let dy = Array.from({ length: n + 1 }, () => 0);
+            dy[1] = 1;
+            dy[2] = 2;
+            for (let i = 3; i <= n; i++) {
+                dy[i] = dy[i - 1] + dy[i - 2];
+            }
+            return dy[n];
+        }
+        console.log(solution(7));
+    </script>
+</body>
+
+</html>
