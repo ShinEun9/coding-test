@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>섬나라아일랜드 BFS</title>
+</head>
+
+<body>
+
+    <script> function solution(board) {
+            let answer = 0;
+            let queue = [];
+            const dx = [-1, 0, +1, -1, +1, -1, 0, +1];
+            const dy = [-1, -1, -1, 0, 0, +1, +1, +1];
+            const n = board.length;
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < board.length; j++) {
+                    if (board[i][j] === 1) {
+                        answer++;
+                        queue.push([i, j]);
+                        board[i][j] = 0;
+                    }
+
+                    while (queue.length > 0) {
+                        let [a, b] = queue.shift();
+                        for (let k = 0; k < dx.length; k++) {
+                            if (a + dx[k] < 0 || a + dx[k] >= n || b + dy[k] < 0 && b + dy[k] <= n) continue;
+
+                            if (board[a + dx[k]][b + dy[k]] === 1) {
+                                queue.push([a + dx[k], b + dy[k]]);
+                                board[a + dx[k]][b + dy[k]] = 0;
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            return answer;
+        }
+    </script>
+</body>
+
+</html>
