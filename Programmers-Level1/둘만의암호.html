@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>둘만의 암호</title>
+</head>
+
+<body>
+    <script>
+        function solution(s, skip, index) {
+            var answer = ''
+            const skipAschii = Array.from(skip).map(item => item.charCodeAt())
+
+            Array.from(s).forEach(item => {
+                let i = 0;
+                let aschii = item.charCodeAt()
+
+                i++;
+                aschii++;
+                while (i <= index) {
+                    if (!skipAschii.includes(aschii)) {
+                        i++;
+                    }
+
+                    if (i !== index) {
+                        aschii++;
+                    }
+                    if (aschii - 97 > 25) aschii = 97;
+                }
+
+                answer += String.fromCharCode(aschii)
+            })
+
+            return answer;
+        }
+        const s = "aukks"
+        const skip = "wbqd";
+        const index = 5
+        console.log(solution(s, skip, index))
+    </script>
+</body>
+
+</html>
