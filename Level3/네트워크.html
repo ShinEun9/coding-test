@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네트워크</title>
+</head>
+
+<body>
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/43162">
+        네트워크문제</a>
+    <script>
+        // 프로그래머스 네트워크 문제
+        // bfs
+        // function solution(n, computers) {
+        //     let answer = 0;
+
+        //     const graph = Array.from({ length: n + 1 }, () => Array.from({ length: 0 }))
+        //     const ch = Array.from({ length: n + 1 }, () => 0);
+
+        //     for (let i = 0; i < computers.length; i++) {
+        //         for (let j = 0; j < computers[i].length; j++) {
+        //             if (i !== j && computers[i][j] === 1) {
+        //                 graph[i + 1].push(j + 1);
+        //             }
+        //         }
+        //     }
+
+        //     let queue = [];
+
+        //     for (let i = 1; i <= n; i++) {
+        //         if (ch[i] === 0) {
+        //             ch[i] = 1;
+        //             answer++;
+        //             queue.push(i);
+
+        //             while (queue.length) {
+        //                 let v = queue.shift();
+        //                 ch[v] = 1;
+
+        //                 for (let x of graph[v]) {
+        //                     if (ch[x] === 0) {
+        //                         queue.push(x);
+        //                     }
+        //                 }
+        //             }
+
+        //         }
+        //     }
+
+
+        //     return answer;
+        // }
+
+
+        // bfs
+        function solution(n, computers) {
+            let answer = 0;
+
+            const graph = Array.from({ length: n + 1 }, () => Array.from({ length: 0 }))
+            const ch = Array.from({ length: n + 1 }, () => 0);
+
+            for (let i = 0; i < computers.length; i++) {
+                for (let j = 0; j < computers[i].length; j++) {
+                    if (i !== j && computers[i][j] === 1) {
+                        graph[i + 1].push(j + 1);
+                    }
+                }
+            }
+
+            function DFS(L) {
+                ch[L] = 1;
+
+                for (let i = 0; i < graph[L].length; i++) {
+                    if (ch[graph[L][i]] === 0) {
+                        DFS(graph[L][i]);
+                    }
+                }
+            }
+
+            for (let i = 1; i <= n; i++) {
+                if (ch[i] === 0) {
+                    answer++;
+                    DFS(i)
+                }
+            }
+
+            return answer;
+        }
+        console.log(solution(3, [[1, 1, 0], [1, 1, 0], [0, 0, 1]]))
+        console.log(solution(3, [[1, 1, 0], [1, 1, 1], [0, 1, 1]]))
+    </script>
+</body>
+
+</html>
