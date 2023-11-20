@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>귤고르기</title>
+</head>
+
+<body>
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/138476
+    ">귤고르기</a>
+
+    <script>
+        function solution(k, tangerine) {
+            var answer = 0;
+            let obj = {};
+            for (let x of tangerine) {
+                if (obj[x]) {
+                    obj[x]++;
+                }
+                else {
+                    obj[x] = 1;
+                }
+            }
+
+            let tmp = k;
+            let countArr = []
+            Object.entries(obj).forEach((item) => {
+                countArr.push(item[1])
+            })
+            countArr = countArr.sort((a, b) => { return b - a })
+
+            for (let x of countArr) {
+                tmp = tmp - x;
+                answer++
+                if (tmp <= 0) break;
+            }
+
+            return answer;
+        }
+    </script>
+</body>
+
+</html>

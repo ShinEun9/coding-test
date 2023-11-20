@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멀리뛰기</title>
+</head>
+
+<body>
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/12914">멀리뛰기</a>
+    <script>
+        function solution(n) {
+            let answer = 0;
+            const arr = Array.from({ length: 2001 }, () => 0);
+            arr[1] = 1;
+            arr[2] = 2;
+            for (let i = 3; i <= 2000; i++) {
+                arr[i] = arr[i - 2] % 1234567 + arr[i - 1] % 1234567
+            }
+
+            return arr[n] % 1234567;
+        }
+
+    </script>
+</body>
+
+</html>
