@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>괄호회전하기</title>
+</head>
+
+<body>
+    <script>
+        function solution(s) {
+            var answer = 0;
+            let arr = s.split("")
+            const pairs = {
+                '}': '{',
+                ']': '[',
+                ')': '('
+            }
+
+            for (let i = 0; i < s.length; i++) {
+                const first = arr.shift();
+                arr = [...arr, first];
+                let stack = []
+                let tmp = "YES"
+                for (let j = 0; j < arr.length; j++) {
+                    if (arr[j] === "[" || arr[j] === "{" || arr[j] === "(") {
+                        stack.push(arr[j])
+                    }
+                    else {
+                        if (stack.length === 0 || pairs[arr[j]] !== stack[stack.length - 1]) {
+                            tmp = "NO";
+                            break;
+                        }
+                        if (pairs[arr[j]] === stack[stack.length - 1]) {
+                            stack.pop();
+                        }
+                    }
+                }
+
+                if (stack.length !== 0) {
+                    tmp = "NO"
+                }
+                if (tmp === "YES") {
+                    answer++;
+                }
+            }
+
+
+            return answer;
+        }
+
+        console.log(solution("[](){}"))
+        console.log(solution("}]()[{"))
+        console.log(solution("[)(]"))
+
+
+        // function solution(s) {
+        //     if (s.length % 2 === 1) return 0;
+
+        //     let answer = 0;
+        //     const mapping = { "}": "{", "]": "[", ")": "(" };
+
+        //     for (let i = 0; i < s.length; i++) {
+        //         const stack = [];
+        //         const rotate = s.slice(i) + s.slice(0, i);
+        //         let flag = true;
+
+        //         for (let j = 0; j < s.length; j++) {
+        //             if (rotate[j] === "[" || rotate[j] === "(" || rotate[j] === "{")
+        //                 stack.push(rotate[j]);
+        //             else {
+        //                 const last = stack.pop();
+        //                 if (last !== mapping[rotate[j]]) {
+        //                     flag = false
+        //                     break;
+        //                 }
+        //             }
+        //         }
+
+        //         if (flag) answer++;
+        //     }
+
+        //     return answer;
+        // }
+    </script>
+</body>
+
+</html>

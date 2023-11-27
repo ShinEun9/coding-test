@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연속부분수열합의개수</title>
+</head>
+
+<body>
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131701">연속부분수열합의개수</a>
+    <script>
+        function solution(elements) {
+            var answer = 0;
+            let data = [];
+            for (let i = 0; i < elements.length; i++) {
+                let j = i;
+                let count = 1;
+                let sum = 0;
+                while (count <= elements.length) {
+                    sum += elements[j];
+                    data.push(sum);
+                    count++;
+                    j++;
+                    if (j >= elements.length) {
+                        j = 0;
+                    }
+                }
+                answer = new Set(data).size;
+                console.log(answer)
+            }
+        }
+    </script>
+</body>
+
+</html>

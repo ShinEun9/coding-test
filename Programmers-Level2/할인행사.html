@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할인행사</title>
+</head>
+
+<body>
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/131127">할인행사</a>
+    <script>
+        function solution(want, number, discount) {
+            var answer = 0;
+
+            const key = new Set(discount);
+            const obj = {}
+            key.forEach((item) => {
+                obj[item] = 0;
+            })
+
+            for (let i = 0; i < 10; i++) {
+                let x = discount[i];
+                obj[x]++;
+            }
+
+            for (let i = 0; i <= discount.length - 10; i++) {
+                let tmp = "YES";
+                for (let j = 0; j < want.length; j++) {
+                    if (obj[want[j]] !== number[j]) {
+                        tmp = "NO";
+                        break;
+                    }
+                }
+                if (tmp === "YES") {
+                    answer++;
+                }
+
+                const x = discount[i];
+                const y = discount[i + 10]
+                obj[x]--;
+                obj[y]++;
+            }
+
+            return answer;
+        }
+
+        console.log(solution(["banana", "apple", "rice", "pork", "pot"], [3, 2, 2, 2, 1], ["chicken", "apple", "apple", "banana", "rice", "apple", "pork", "banana", "pork", "rice", "pot", "banana", "apple", "banana"]))
+
+        // console.log(solution(["apple"], [10], ["banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana", "banana"]))
+
+        // console.log(solution(["apple"], [10], ["apple", "apple", "apple", "apple", "apple", "apple", "apple", "apple", "apple", "apple"]))
+
+    </script>
+</body>
+
+</html>

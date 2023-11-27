@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기능개발</title>
+</head>
+
+<body>
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42586">기능개발</a>
+    <script>
+        function solution(progresses, speeds) {
+            var answer = [];
+            let stack = [];
+            for (let i = 0; i < progresses.length; i++) {
+                let a = Math.ceil((100 - progresses[i]) / speeds[i])
+                stack.push(a)
+            }
+
+            let i = 0;
+            while (i < stack.length) {
+                let tmp = 0;
+                tmp++;
+                let j = i + 1;
+
+                while (stack[i] >= stack[j]) {
+                    tmp++;
+                    j++;
+                }
+                answer.push(tmp);
+                i = j;
+            }
+
+            return answer;
+        }
+
+        console.log(solution([93, 30, 55], [1, 30, 5]))
+        // function solution(progresses, speeds) {
+        //     let answer = [0];
+        //     let days = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]));
+        //     let maxDay = days[0];
+
+        //     for(let i = 0, j = 0; i< days.length; i++){
+        //         if(days[i] <= maxDay) {
+        //             answer[j] += 1;
+        //         } else {
+        //             maxDay = days[i];
+        //             answer[++j] = 1;
+        //         }
+        //     }
+
+        //     return answer;
+        // }
+    </script>
+</body>
+
+</html>

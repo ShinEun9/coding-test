@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주식가격</title>
+</head>
+
+<body>
+    <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42584">주식가격</a>
+    <script>
+        function solution(prices) {
+            var answer = [];
+            for (let i = 0; i < prices.length - 1; i++) {
+                let sum = 1;
+                let j = i + 1;
+                while (true) {
+                    if (prices[i] > prices[j]) {
+                        break;
+                    }
+                    if (j === prices.length - 1) {
+                        break;
+                    }
+                    sum++;
+                    j++;
+                }
+                answer.push(sum)
+            }
+            answer.push(0);
+            return answer;
+        }
+        console.log(solution([1, 2, 3, 2, 3]))
+    </script>
+</body>
+
+</html>
