@@ -11,79 +11,261 @@
 <body>
     <a href="https://school.programmers.co.kr/learn/courses/30/lessons/42626">더맵게</a>
     <script>
-        class MinHeap {
-            constructor() {
-                this.heap = [];
-            }
+        // class MinHeap {
+        //     constructor() {
+        //         this.heap = [];
+        //     }
 
-            size() {
-                return this.heap.length;
-            }
+        //     size() {
+        //         return this.heap.length;
+        //     }
 
-            // 값을 넣되, 오름차 순 정렬함
-            push(value) {
-                this.heap.push(value);
-                let currentIndex = this.heap.length - 1;
+        //     // 값을 넣되, 오름차 순 정렬함
+        //     push(value) {
+        //         this.heap.push(value);
+        //         let currentIndex = this.heap.length - 1;
 
-                while (
-                    currentIndex > 0 &&
-                    this.heap[currentIndex] < this.heap[Math.floor((currentIndex - 1) / 2)]
-                ) {
-                    const temp = this.heap[currentIndex];
-                    this.heap[currentIndex] = this.heap[Math.floor((currentIndex - 1) / 2)];
-                    this.heap[Math.floor((currentIndex - 1) / 2)] = temp;
-                    currentIndex = Math.floor((currentIndex - 1) / 2);
+        //         while (
+        //             currentIndex > 0 &&
+        //             this.heap[currentIndex] < this.heap[Math.floor((currentIndex - 1) / 2)]
+        //         ) {
+        //             const temp = this.heap[currentIndex];
+        //             this.heap[currentIndex] = this.heap[Math.floor((currentIndex - 1) / 2)];
+        //             this.heap[Math.floor((currentIndex - 1) / 2)] = temp;
+        //             currentIndex = Math.floor((currentIndex - 1) / 2);
+        //         }
+        //     }
+
+        //     // 값을 빼되, 오름차 순 정렬 함
+        //     pop() {
+        //         if (this.heap.length === 0) return null;
+        //         if (this.heap.length === 1) return this.heap.pop();
+
+        //         const minValue = this.heap[0];
+        //         this.heap[0] = this.heap.pop();
+        //         let currentIndex = 0;
+
+        //         while (currentIndex * 2 + 1 < this.heap.length) {
+        //             let minChildIndex = currentIndex * 2 + 2 < this.heap.length && this.heap[currentIndex * 2 + 2] < this.heap[currentIndex * 2 + 1] ? currentIndex * 2 + 2 : currentIndex * 2 + 1;
+
+        //             if (this.heap[currentIndex] < this.heap[minChildIndex]) {
+        //                 break;
+        //             }
+
+        //             const temp = this.heap[currentIndex];
+        //             this.heap[currentIndex] = this.heap[minChildIndex];
+        //             this.heap[minChildIndex] = temp;
+        //             currentIndex = minChildIndex;
+        //         }
+
+        //         return minValue;
+        //     }
+
+        //     peek() {
+        //         return this.heap[0];
+        //     }
+        // }
+
+        // function solution(scoville, K) {
+        //     const minHeap = new MinHeap();
+
+        //     for (const sco of scoville) {
+        //         minHeap.push(sco);
+        //     }
+
+        //     let mixedCount = 0;
+
+        //     while (minHeap.size() >= 2 && minHeap.peek() < K) {
+        //         const first = minHeap.pop();
+        //         const second = minHeap.pop();
+        //         const mixedScov = first + second * 2;
+        //         minHeap.push(mixedScov);
+        //         mixedCount++;
+        //     }
+
+        //     return minHeap.peek() >= K ? mixedCount : -1;
+        // }
+
+
+        2
+        3
+        4
+        5
+        6
+        7
+        8
+        9
+        10
+        11
+        12
+        13
+        14
+        15
+        16
+        17
+        18
+        19
+        20
+        21
+        22
+        23
+        24
+        25
+        26
+        27
+        28
+        29
+        30
+        31
+        32
+        33
+        34
+        35
+        36
+        37
+        38
+        39
+        40
+        41
+        42
+        43
+        44
+        45
+        46
+        47
+        48
+        49
+        50
+        51
+        52
+        53
+        54
+        55
+        56
+        57
+        58
+        59
+        60
+        61
+        62
+        63
+        64
+        65
+        66
+        67
+        68
+        69
+        70
+        71
+        72
+        73
+        74
+        75
+        76
+        77
+        78
+        79
+        80
+        81
+        82
+        83
+        84
+        85
+        86
+        87
+        88
+        89
+        90
+        91
+        92
+        93
+        94
+        95
+        96
+        function solution(scoville, K) {
+            scoville.sort((a, b) => b - a)
+            let cnt = 0;
+            let under_K = []
+            let flag = 0 // 다 합쳐서 K보다 큰지 안큰지 판별 0이면 안큰거 1이면 큰거
+
+            for (let i = 0; i < scoville.length; ++i) {
+                if (scoville[i] < K) {
+                    under_K.push(scoville[i])
+                }
+                else {
+                    flag = 1
                 }
             }
-
-            // 값을 빼되, 오름차 순 정렬 함
-            pop() {
-                if (this.heap.length === 0) return null;
-                if (this.heap.length === 1) return this.heap.pop();
-
-                const minValue = this.heap[0];
-                this.heap[0] = this.heap.pop();
-                let currentIndex = 0;
-
-                while (currentIndex * 2 + 1 < this.heap.length) {
-                    let minChildIndex = currentIndex * 2 + 2 < this.heap.length && this.heap[currentIndex * 2 + 2] < this.heap[currentIndex * 2 + 1] ? currentIndex * 2 + 2 : currentIndex * 2 + 1;
-
-                    if (this.heap[currentIndex] < this.heap[minChildIndex]) {
+            let mixed = []
+            let m_i = 0
+            let i = 0
+            let n1 = 0
+            let n2 = 0
+            while (1) {
+                if (mixed[m_i] != undefined) {
+                    if (under_K.length != 0) {
+                        if (under_K.at(-1) < mixed[m_i]) {
+                            n1 = under_K.pop()
+                        }
+                        else {
+                            n1 = mixed[m_i]
+                            ++m_i
+                        }
+                    }
+                    else {
+                        n1 = mixed[m_i]
+                        ++m_i
+                    }
+                }
+                else {
+                    if (under_K.length != 0) {
+                        n1 = under_K.pop()
+                    }
+                    else {
                         break;
                     }
-
-                    const temp = this.heap[currentIndex];
-                    this.heap[currentIndex] = this.heap[minChildIndex];
-                    this.heap[minChildIndex] = temp;
-                    currentIndex = minChildIndex;
+                }
+                if (mixed[m_i] != undefined) {
+                    if (under_K.length != 0) {
+                        if (under_K.at(-1) < mixed[m_i]) {
+                            n2 = under_K.pop()
+                        }
+                        else {
+                            n2 = mixed[m_i]
+                            ++m_i
+                        }
+                    }
+                    else {
+                        n2 = mixed[m_i]
+                        ++m_i
+                    }
+                }
+                else {
+                    if (under_K.length != 0) {
+                        n2 = under_K.pop()
+                    }
+                    else {
+                        ++cnt
+                        break;
+                    }
                 }
 
-                return minValue;
+                if (n1 + n2 * 2 < K) {
+                    mixed.push(n1 + n2 * 2)
+                }
+                else {
+                    flag = 1
+                }
+                ++cnt
             }
 
-            peek() {
-                return this.heap[0];
+            if (flag == 1) {
+                return cnt
             }
-        }
+            else {
 
-        function solution(scoville, K) {
-            const minHeap = new MinHeap();
-
-            for (const sco of scoville) {
-                minHeap.push(sco);
+                return -1
             }
-
-            let mixedCount = 0;
-
-            while (minHeap.size() >= 2 && minHeap.peek() < K) {
-                const first = minHeap.pop();
-                const second = minHeap.pop();
-                const mixedScov = first + second * 2;
-                minHeap.push(mixedScov);
-                mixedCount++;
-            }
-
-            return minHeap.peek() >= K ? mixedCount : -1;
         }
     </script>
 </body>

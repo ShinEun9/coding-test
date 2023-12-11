@@ -11,62 +11,108 @@
 <body>
     <a href="https://school.programmers.co.kr/learn/courses/30/lessons/60061">기둥과보</a>
     <script>
+        // function solution(n, build_frame) {
+        //     const answer = [];
+
+        //     for (const frame of build_frame) {
+        //         const [x, y, fr, isInstall] = frame;
+
+        //         if (isInstall) buildFrame(answer, x, y, fr);
+        //         else destroyFrame(answer, x, y, fr);
+        //     }
+
+        //     return answer.sort((a, b) => a[0] === b[0] ? a[1] === b[1] ? a[2] - b[2] : a[1] - b[1] : a[0] - b[0]);
+        // }
+
+        // const checkPillar = (ans, x, y) => {
+        //     if (y === 0) return true;
+        //     else if (ans.find(([a, b, fr]) => a === x && b === y - 1 && fr === 0)) return true;
+        //     else if (ans.find(([a, b, fr]) => a === x && b === y && fr === 1)) return true;
+        //     else if (ans.find(([a, b, fr]) => a === x - 1 && b === y && fr === 1)) return true;
+        //     return false;
+        // }
+
+        // const checkPlate = (ans, x, y) => {
+        //     if (ans.find(([a, b, fr]) => a === x && b === y - 1 && fr === 0)) return true;
+        //     else if (ans.find(([a, b, fr]) => a === x + 1 && b === y - 1 && fr === 0)) return true;
+        //     else if (ans.find(([a, b, fr]) => a === x + 1 && b === y && fr === 1) &&
+        //         ans.find(([a, b, fr]) => a === x - 1 && b === y && fr === 1)) return true;
+        //     return false;
+        // }
+
+        // const buildFrame = (ans, x, y, frame) => {
+        //     if (frame) {
+        //         if (checkPlate(ans, x, y)) ans.push([x, y, frame]);
+        //     }
+        //     else {
+        //         if (checkPillar(ans, x, y)) ans.push([x, y, frame]);
+        //     }
+        // }
+
+        // const destroyFrame = (ans, x, y, frame) => {
+        //     const copy = ans.slice();
+        //     const idx = ans.findIndex(([a, b, fr]) => a === x && b === y && fr === frame);
+
+        //     copy.splice(idx, 1);
+
+        //     for (const frs of copy) {
+        //         const [xpos, ypos, fr] = frs;
+
+        //         if (fr) {
+        //             if (!checkPlate(copy, xpos, ypos)) return;
+        //         }
+        //         else {
+        //             if (!checkPillar(copy, xpos, ypos)) return;
+        //         }
+        //     }
+
+        //     ans.splice(idx, 1);
+        // }
+
         function solution(n, build_frame) {
-            const answer = [];
+            const frames = [];
+            build_frame.forEach((frame) => {
+                const [x, y, type, isInstall] = frame;
 
-            for (const frame of build_frame) {
-                const [x, y, fr, isInstall] = frame;
-
-                if (isInstall) buildFrame(answer, x, y, fr);
-                else destroyFrame(answer, x, y, fr);
-            }
-
-            return answer.sort((a, b) => a[0] === b[0] ? a[1] === b[1] ? a[2] - b[2] : a[1] - b[1] : a[0] - b[0]);
-        }
-
-        const checkPillar = (ans, x, y) => {
-            if (y === 0) return true;
-            else if (ans.find(([a, b, fr]) => a === x && b === y - 1 && fr === 0)) return true;
-            else if (ans.find(([a, b, fr]) => a === x && b === y && fr === 1)) return true;
-            else if (ans.find(([a, b, fr]) => a === x - 1 && b === y && fr === 1)) return true;
-            return false;
-        }
-
-        const checkPlate = (ans, x, y) => {
-            if (ans.find(([a, b, fr]) => a === x && b === y - 1 && fr === 0)) return true;
-            else if (ans.find(([a, b, fr]) => a === x + 1 && b === y - 1 && fr === 0)) return true;
-            else if (ans.find(([a, b, fr]) => a === x + 1 && b === y && fr === 1) &&
-                ans.find(([a, b, fr]) => a === x - 1 && b === y && fr === 1)) return true;
-            return false;
-        }
-
-        const buildFrame = (ans, x, y, frame) => {
-            if (frame) {
-                if (checkPlate(ans, x, y)) ans.push([x, y, frame]);
-            }
-            else {
-                if (checkPillar(ans, x, y)) ans.push([x, y, frame]);
-            }
-        }
-
-        const destroyFrame = (ans, x, y, frame) => {
-            const copy = ans.slice();
-            const idx = ans.findIndex(([a, b, fr]) => a === x && b === y && fr === frame);
-
-            copy.splice(idx, 1);
-
-            for (const frs of copy) {
-                const [xpos, ypos, fr] = frs;
-
-                if (fr) {
-                    if (!checkPlate(copy, xpos, ypos)) return;
+                if (isInstall) {
+                    if (checkAdd(x, y, type, frames)) frames.push([x, y, type]);
                 }
-                else {
-                    if (!checkPillar(copy, xpos, ypos)) return;
-                }
+                else checkDelete(x, y, type, frames);
+            })
+            return frames.sort((a, b) => a[0] === b[0] ? a[1] === b[1] ? a[2] - b[2] : a[1] - b[1] : a[0] - b[0]);
+        }
+
+        function checkAdd(x, y, type, frames) {
+            if (type) {
+
+                if (frames.find(([nx, ny, ntype]) => !ntype && nx === x && ny === y - 1)) return true;
+                if (frames.find(([nx, ny, ntype]) => !ntype && nx === x + 1 && ny === y - 1)) return true;
+                if (frames.find(([nx, ny, ntype]) => ntype && ny === y && nx === x - 1) &&
+                    frames.find(([nx, ny, ntype]) => ntype && ny === y && nx === x + 1)) return true;
+                return false;
+            } else {
+
+                if (y === 0) return true;
+                if (frames.find(([nx, ny, ntype]) => !ntype && nx === x && ny === y - 1)) return true;
+                if (frames.find(([nx, ny, ntype]) => ntype && nx === x && ny === y)) return true;
+                if (frames.find(([nx, ny, ntype]) => ntype && nx === x - 1 && ny === y)) return true;
+                return false;
+            }
+        }
+
+        function checkDelete(x, y, type, frames) {
+            const copy = frames.slice();
+
+
+            const delIdx = copy.findIndex(([nx, ny, ntype]) => type === ntype && x === nx && y === ny);
+            copy.splice(delIdx, 1);
+
+            for (let frame of copy) {
+                const [nx, ny, ntype] = frame;
+                if (!checkAdd(nx, ny, ntype, copy)) return;
             }
 
-            ans.splice(idx, 1);
+            frames.splice(delIdx, 1);
         }
     </script>
 </body>
