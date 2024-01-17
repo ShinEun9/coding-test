@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>의상</title>
+</head>
+
+<body>
+    <script>
+        function solution(clothes) {
+
+            let m = new Map();
+
+            for ([의상, 종류] of clothes) {
+                if (m.has(종류)) { m.set(종류, [...m.get(종류), 의상]) }
+                else { m.set(종류, [의상]) }
+            }
+
+            let answer = 1;
+            for (let x of m) {
+                answer *= (x[1].length + 1)
+            }
+
+            return answer - 1;
+        }
+    </script>
+</body>
+
+</html>

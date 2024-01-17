@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>베스트앨범</title>
+</head>
+
+<body>
+    <script>
+        // function solution(genres, plays) {
+        //     var answer = [];
+        //     let s = new Set(genres);
+        //     let musicPlayTotalCount = {};
+
+        //     for (let x of s) {
+        //         musicPlayTotalCount[x] = 0;
+        //     }
+
+        //     let m = new Map();
+
+        //     for (let i = 0; i < genres.length; i++) {
+        //         let genre = genres[i];
+
+        //         if (m.has(genre)) {
+        //             m.set(genre, [...m.get(genre), i]);
+        //         }
+        //         else {
+        //             m.set(genre, [i]);
+        //         }
+        //         musicPlayTotalCount[genre] += plays[i];
+        //     }
+        //     let mArray = Array.from(m)
+
+        //     mArray = mArray.sort((a, b) => musicPlayTotalCount[b[0]] - musicPlayTotalCount[a[0]]);
+
+        //     for (let x of mArray) {
+        //         let k = x[1].sort((a, b) => plays[b] - plays[a]);
+        //         if (k.length >= 2) {
+        //             answer.push(k[0], k[1]);
+        //         }
+        //         else {
+        //             answer.push(k[0])
+        //         }
+        //     }
+
+
+        //     return answer;
+        // }
+
+
+        // 정답
+        function solution(genres, plays) {
+            var dic = {};
+            genres.forEach((t, i) => {
+                dic[t] = dic[t] ? dic[t] + plays[i] : plays[i];
+            });
+
+            var dupDic = {};
+            return genres
+                .map((t, i) => ({ genre: t, count: plays[i], index: i }))
+                .sort((a, b) => {
+                    if (a.genre !== b.genre) return dic[b.genre] - dic[a.genre];
+                    if (a.count !== b.count) return b.count - a.count;
+                    return a.index - b.index;
+                })
+                .filter(t => {
+                    if (dupDic[t.genre] >= 2) return false;
+                    dupDic[t.genre] = dupDic[t.genre] ? dupDic[t.genre] + 1 : 1;
+                    return true;
+                })
+                .map(t => t.index);
+        }
+    </script>
+</body>
+
+</html>

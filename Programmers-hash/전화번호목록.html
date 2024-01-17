@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전화번호목록</title>
+</head>
+
+<body>
+    <script>
+        function solution(phone_book) {
+            var answer = true;
+            let data = phone_book.sort();
+
+            for (let i = 0; i < data.length - 1; i++) {
+                if (data[i + 1].startsWith(data[i])) {
+                    answer = false;
+                    break;
+                }
+            }
+            return answer;
+        }
+
+        // 해쉬로 풀기
+        // function solution(phoneBook) {
+        //     const table = {};
+
+        //     for (const number of phoneBook) {
+        //         table[number] = true;
+        //     };
+
+        //     for (const number of phoneBook) {
+        //         for (let i = 1; i < number.length; i += 1) {
+        //             const prefix = number.slice(0, i);
+        //             if (table[prefix]) return false;
+
+        //         };
+        //     };
+
+        //     return true;
+        // }
+    </script>
+</body>
+
+</html>

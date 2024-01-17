@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폰켓몬</title>
+</head>
+
+<body>
+    <script>
+
+
+        // function solution(nums) {
+        //     const max = nums.length / 2;
+        //     const arr = [...new Set(nums)];
+
+        //     return arr.length > max ? max : arr.length
+        // }
+
+
+        function solution(nums) {
+            let m = new Map();
+            let 고를수있는최대갯수 = nums.length / 2;
+            for (let x of nums) {
+                if (m.has(x)) { m.set(x, m.get(x) + 1); }
+                else { m.set(x, 1) }
+            }
+
+            let 종류수 = [...m.values()].length;
+
+            if (종류수 >= 고를수있는최대갯수) {
+                return 고를수있는최대갯수
+            }
+            else if (종류수 < 고를수있는최대갯수) {
+                return 종류수;
+            };
+
+        }
+    </script>
+</body>
+
+</html>
