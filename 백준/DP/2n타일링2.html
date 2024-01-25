@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2n타일링(2)</title>
+</head>
+
+<body>
+    <script>
+        function solution(n) {
+            const dp = Array.from({ length: n + 1 }, () => 0);
+
+            dp[1] = 1;
+            dp[2] = 3;
+            for (let i = 3; i <= n; i++) {
+                dp[i] = dp[i - 1] + dp[i - 2] * 2;
+                dp[i] = dp[i] % 10007
+            }
+            return dp[n]
+        }
+        console.log(solution(12))
+    </script>
+</body>
+
+</html>
