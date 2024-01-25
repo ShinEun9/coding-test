@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가장큰수</title>
+</head>
+
+<body>
+    <script>
+        // function solution(numbers) {
+
+        //     let s = numbers.sort().reverse();
+        //     console.log(s)
+        //     let answer = '';
+        //     let stack = [];
+        //     for (let i = 0; i < s.length; i++) {
+        //         console.log(s[i][0], s[i + 1][0])
+        //         if (s[i][0] === s[i + 1][0]) {
+        //             stack.push(s[i]);
+        //         }
+        //         else {
+        //             answer += stack.sort((a, b) => {
+        //                 if (a.length !== b.length) {
+        //                     return a.length - b.length;
+        //                 }
+        //                 else {
+        //                     return b - a;
+        //                 }
+        //             }).join('');
+
+        //             stack = [];
+        //             answer += s[i];
+        //         }
+        //     }
+        //     return answer;
+        // }
+
+        // let numbers = [3, 30, 34, 5, 9]
+        // console.log(solution(numbers))
+
+
+        // function solution(citations) {
+        //     citations = citations.sort(sorting);
+        //     var i = 0;
+        //     while (i + 1 <= citations[i]) {
+        //         i++;
+        //     }
+        //     return i;
+
+
+        //     function sorting(a, b) {
+        //         return b - a;
+        //     }
+        // }
+
+        function solution(M) {
+            let answer = -1;
+            let n = Math.floor(M / 5);
+            for (let i = n; i >= 0; i--) {
+                let k = (M - i * 5) % 3;
+                if (k !== 0) continue;
+                else {
+                    answer = i + (M - i * 5) / 3;
+                    break;
+                }
+            }
+            return answer;
+        }
+        console.log(solution(18))
+        console.log(solution(4))
+        console.log(solution(9))
+        console.log(solution(11))
+
+
+        // let N = input.shift();
+        let N = 10
+        let i = 0;
+        while (true) {
+            console.log(N)
+            if (N === 1) break;
+            if (N % 3 === 0) {
+                N = N / 3;
+            }
+            else if (N % 2 === 0) {
+                N = N / 2;
+            }
+            else {
+                N = N - 1;
+            }
+            i++;
+        }
+
+        console.log(i)
+    </script>
+</body>
+
+</html>

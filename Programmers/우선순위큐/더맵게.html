@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <script>
+        function solution(scoville, K) {
+            var answer = 0;
+
+            let sortScovvile = scoville.sort((a, b) => a - b)
+
+            let i = 0;
+            while (true) {
+                let a = sortScovvile[i];
+                let b = sortScovvile[i + 1];
+
+                let newFood = a + b * 2;
+
+
+                // let a = sortScovvile.shift();
+                // let b = sortScovvile.shift();
+
+                // let newFood = a + b * 2;
+                // sortScovvile.push(newFood);
+
+                // answer++;
+
+                // sortScovvile = sortScovvile.sort((a, b) => a - b);
+                // if (sortScovvile[0] >= K) break;
+            }
+
+
+            return answer;
+        }
+
+        console.log(solution([1, 2, 3, 9, 10, 12], 7)
+        )    </script>
+</body>
+
+</html>
