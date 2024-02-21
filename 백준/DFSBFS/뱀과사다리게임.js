@@ -1,6 +1,5 @@
-// https://www.acmicpc.net/problem/16928
-
 const [N, ...M] = require("fs").readFileSync("뱀과사다리게임.txt").toString().trim().split("\n");
+// const [N, ...M] = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n");
 
 const m = M.map((item) => item.split(" "));
 const obj = {};
@@ -18,7 +17,6 @@ while (queue.length) {
   if (v > 100) break;
 
   if (obj[String(v)]) {
-    console.log(obj[String(v)]);
     const newNode = obj[String(v)];
     if (count[newNode]) {
       if (count[v] < count[newNode]) {
@@ -55,5 +53,4 @@ while (queue.length) {
   }
 }
 
-console.log(count);
 console.log(count[100]);
